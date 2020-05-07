@@ -1,6 +1,10 @@
+\documentclass[17pt]{beamer} %Makes presentation
+%\documentclass[handout, 17pt]{beamer} %Makes Handouts
 \input{preamble}
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows}
+
+\usepackage{multicol}
 
 \title{Literature Review}
 
@@ -12,6 +16,399 @@
 \frame{\titlepage}
 
 \frame{\tableofcontents}
+
+\section{Scientific ``Literatures''}
+\frame{\tableofcontents[currentsection]}
+
+\frame{
+
+\frametitle{What is a literature?}
+
+\begin{itemize}\itemsep1em
+\item Definition: A accumulated body of written work that collectively constitutes knowledge in a specific field of study.
+	\begin{itemize}
+	\item Basically: \textit{what we know and don't know}
+	\item In philosophy, sometimes ``the canon''
+	\end{itemize}
+\item<2-> All research builds on ``the literature''
+\item<3-> All research should contribute to ``the literature''
+\end{itemize}
+}
+
+\frame{
+
+\frametitle{What is a literature?}
+
+\begin{itemize}\itemsep1em
+\item<2-> How do we decide what individual pieces of research fall within ``the literature''?
+\item<3-> Any literature is amorphous and ultimately individually and socially constructed
+	\begin{itemize}
+	\item<4-> ``The literature'' is what is relevant to your research
+	\item<5-> Others may disagree with your definition of what research is relevant versus irrelevant
+	\end{itemize}
+\end{itemize}
+
+}
+
+\frame{
+
+\frametitle{Organizing Literature}
+
+There are a few broad ways that we might identify ``a literature'':
+
+\begin{enumerate}
+\item Research using shared concepts
+\item Research using shared theory
+\item Research using shared data sources
+\item Research using shared methods of analysis
+\item Research by the same author(s)/team(s)
+\end{enumerate}
+
+}
+
+\frame{
+\frametitle{I. Concepts}
+
+\begin{itemize}\itemsep0.5em
+\item Studies on a common concept, e.g.:
+	\begin{itemize}
+	\item Trust
+	\item Negative advertising
+	\item Economic growth
+	\item Democratization
+	\item Justice
+	\item etc.
+	\end{itemize}
+\item<2-> Individual studies may have little in common except for the concept at focus in the study
+\end{itemize}
+
+}
+
+
+\frame{
+\frametitle{II. Theory}
+
+\begin{itemize}\itemsep0.5em
+\item Studies working from a given theoretical perspective, e.g.:
+	\begin{itemize}
+	\item Rational choice
+	\item Marxism
+	\item Feminism
+	\item<2-> Epigenetics
+	\item<2-> Prospect theory
+	\item<2-> Theory of Planned Behaviour
+	\end{itemize}
+\item<3-> Individual studies may have little in common except for the broad theory stance
+\end{itemize}
+
+}
+
+\frame{
+\frametitle{III. Data}
+
+\begin{itemize}\itemsep0.5em
+\item Studies working with a particular type or source of data, e.g.:
+	\begin{itemize}
+	\item Area Studies
+		\begin{itemize}
+		\item British Politics
+		\item African Politics
+		\end{itemize}
+	\item The 2015 British Election Study
+	\item The Comparative Manifesto Dataset
+	\end{itemize}
+\item<2-> Individual studies may have little \textit{substantively} in common
+\end{itemize}
+
+}
+
+\frame{
+\frametitle{IV. Methods}
+
+\begin{itemize}\itemsep0.5em
+\item Studies working with particular methods, e.g.:
+	\begin{itemize}
+	\item Ethnography
+	\item Text analysis
+	\item Experimentation
+	\item Elite interviewing
+	\item Surveys
+	\end{itemize}
+\item<2-> Individual studies may have little in common except empirics
+	\begin{itemize}
+	\item Often norms or ``best practices'' in the application of particular methods, regardless of research context
+	\end{itemize}
+\end{itemize}
+
+}
+
+\frame{
+\frametitle{V. Authors}
+
+\small
+
+\begin{itemize}\itemsep0em
+\item Studies conducted by a given author or network of authors, e.g.:
+	\begin{itemize}
+	\item<2-> Kahneman and Tversky
+	\item<3-> Mansbridge
+	\item<4-> LIGO collaboration
+	\item<5-> The Sidanius Lab
+	\item<6-> ``The Michigan School''
+	\end{itemize}
+\item<7-> Often an author or team will produce multiple works on a theme over time, using common concepts, theory, methods, and data
+\item<8-> Rivalries!
+\end{itemize}
+
+}
+
+
+\frame{
+
+\frametitle{Putting it all together}
+
+\begin{itemize}\itemsep1em
+\item Think of these organizing frameworks like a Venn Diagram, where each feature can overlap
+\item A literature is the subset of the complete diagram that is relevant to a particular piece of research
+\end{itemize}
+
+}
+
+\frame{}
+
+\frame{
+
+\frametitle{Finding Literature}
+
+\large
+\begin{center}
+Question: How do you find literature?
+\end{center}
+}
+
+\frame{
+
+\frametitle{Finding Literature}
+\begin{itemize}\itemsep0.5em
+\item Library or Google Scholar search
+\item Talk to faculty members and peers
+\item Research syntheses
+\item Journals
+	\begin{itemize}
+	\item Generalist
+	\item Subfield
+	\end{itemize}
+\item Citation networks
+\end{itemize}
+}
+
+\frame{
+
+\frametitle{Citation Networks}
+
+\small
+
+\begin{itemize}\itemsep0.25em
+\item A citation network is the set of unidirectional connections formed by ``co-citation'' (i.e. one piece of research citing another piece of research)
+
+\item<2-> Citations reflect:
+	\begin{itemize}
+	\item<3-> Authors' positioning a piece of research within a literature
+	\item<4-> ``Positive'' citation to research they wish to expand upon, elaborate, or praise
+	\item<5-> ``Negative'' citation to research they wish to criticize
+	\end{itemize}
+\end{itemize}
+
+}
+
+\frame{
+
+\frametitle{Citation Networks}
+
+\small
+
+Problems with using citation networks to understand a literature include:
+
+\begin{itemize}\itemsep0.25em
+\item<2-> Limited numbers of citations (can't cite everything!)
+\item<3-> Positive/negative citation ambiguity
+	\begin{itemize}
+	\item ``Network centrality'' only reflect volume of use, not quality
+	\end{itemize}
+\item<4-> Intentional omission of relevant research
+\item<5-> Self-citation
+\item<6-> \textit{Forward} citation search can be difficult
+\end{itemize}
+
+}
+
+
+\frame{}
+
+
+\frame{
+
+\frametitle{Research Synthesis}
+
+\begin{itemize}\itemsep0.5em
+\item Definition: A research synthesis is a formal review of existing literature that accumulates evidence from multiple studies.
+	\begin{itemize}
+	\item<2-> \textit{Qualitative} literature review
+	\item<2-> \textit{Quantitative} literature review (meta-analysis)
+	\end{itemize}
+\item<3-> Serves two functions:
+	\begin{itemize}
+	\item Summary of existing knowledge
+	\item Identification of limitations or gaps
+	\end{itemize}
+\end{itemize}
+
+}
+
+\frame{
+
+\frametitle{Qualitative Review}
+
+\begin{itemize}\itemsep0.25em
+\item A narrative summary of a body of research, organized around a concept, a theory, a method, a data source, or an author
+	\begin{itemize}
+	\item Usually covers a specific period of time
+	\item May focus on studies from a particular context, or particular perspective
+	\end{itemize}
+\item<2-> Structure and content is flexible
+	\begin{itemize}
+	\item May merely summarize
+	\item May be ``critical''
+	\end{itemize}
+\end{itemize}
+
+}
+
+% This is what you should do for your research proposal.
+
+
+
+\frame{
+
+\frametitle{Quantitative Review}
+
+\begin{itemize}\itemsep1em
+\item A numerical summary of a body of research, organized around a specific statistic of interest (e.g., a prevalence, a correlation, a causal effect)
+	\begin{itemize}
+	\item Also called ``meta-analysis''
+	\end{itemize}
+\item<2-> Structure and content is not flexible
+\item<3-> Provides a specific inference with the intent to guide new research or inform policy
+\end{itemize}
+
+}
+
+\frame{
+
+\frametitle{Quantitative Review}
+
+Structure is nearly always the same:
+
+\small
+\begin{enumerate}\itemsep0em
+\item A body of existing studies is gathered using inclusion/exclusion criteria
+\item Statistic of interest is derived for each study
+\item Statistics are mathematically aggregated (by some form of weighted averaging)
+\item Patterns are examined across between-study sources of variation
+\item An overall estimate is produced
+\end{enumerate}
+
+}
+
+
+
+\frame{
+
+\frametitle{Qualitative versus Quantitative Synthesis}
+
+\small
+
+\begin{itemize}\itemsep0.25em 
+\item Remember: All quantitative synthesis is also qualitative
+\item Solely qualitative synthesis will tend to be more holistic
+\item Solely quantitative synthesis will tend to provide less critical engagement with specific aspects of individual studies
+\item Quantitative synthesis typically makes evidence selection criteria more explicit
+\end{itemize}
+
+}
+
+\frame{}
+
+\frame{
+
+\frametitle{Evaluating Research}
+
+\begin{center}
+In groups of 3, try to generate a set of criteria that you can use to decide whether to believe a given piece of research.
+
+\vspace{1em}
+
+You have 6 minutes.
+
+\end{center}
+
+}
+
+\frame{}
+
+
+\frame<1-4>[label=yourproject]{
+
+\frametitle{{\normalsize Your Research}}
+
+\small
+
+\begin{enumerate}\itemsep0em
+\item<2-> All research should start from a literature
+\item<3-> Identify which literature or literatures you want to address
+\item<4-> Develop a critical literature review of existing evidence
+	\begin{itemize}
+	\item Identify ways you could contribute new knowledge
+	\end{itemize}
+\item<5-> Develop theory and design empirical methods using and/or improving existing theory and methods
+	\begin{itemize}
+	\item Focus on improving \textbf{one} thing
+	\end{itemize}
+\end{enumerate}
+
+}
+
+\frame{
+
+\frametitle{{\normalsize How does research add to a literature?}}
+
+\small
+
+\begin{enumerate}
+\item<2-> Answering unanswered questions
+\item<3-> Applying theory to new cases
+\item<4-> Elaborating more specific implications of theories
+\item<5-> Developing new measures of concepts
+\item<6-> Developing new or better concept definitions
+\item<7-> New, improved, and/or alternative methodology
+\item<8-> Studying alternative units of analysis
+\end{enumerate}
+
+}
+
+
+\againframe<4->{yourproject}
+
+
+\frame{
+
+\centering
+\huge
+Questions?
+
+}
+
+\frame{}
 
 
 \end{document}

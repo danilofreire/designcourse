@@ -1,8 +1,9 @@
 \documentclass[a4paper,12pt]{article}
-\usepackage[margin=0.5in]{geometry}
-\usepackage{hyperref}
+\usepackage[margin=0.75in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsmath}
 
-\title{Statistical Analysis in R}
+\title{Sampling and Data Analysis in R}
 \author{}
 \date{}
 
@@ -16,103 +17,229 @@
 
 \section{Purpose}
 
-The purpose of this activity is to provide you with an understanding of statistical inference and to both develop and apply that knowledge to the use of the R statistical programming environment.
+The purpose of this activity is to provide you with an understanding of statistical inference and to both develop and apply that knowledge to the use of the R statistical programming environment. The activity will be focused on random sampling methods, with some discussion of model-based notions of ``representativeness''.
 
 \section{Overview}
 
-This lab can be completed during class time and at-home. You should allocate time to complete the relevant portions of the lab in line with the scheduled topics for each week. The two quantitative problem sets in LT relate to, roughly, the first half and second half of the material covered in this lab.
+This lab can be completed during class time and at-home. The final problem set for the course (Problem Set 8) will revisit some of this material, in tandem with the new material we will cover in LT.
 
 \section{Your Task}
 
 Using R as instructed, complete the following activities.
 
-\subsection{Sampling}
+\subsection{Populations}
 
 \begin{enumerate}
-\item As we talked about in lecture, simple random sampling is the easiest design-based strategy for ensuring that your sample data are \textit{representative} of the population from which those observations are drawn. The first of today's activities reiterates this idea using R. Start by defining an R vector that is going to contain our ``population'' values. This vector will store numerical values between 0 and 20; you can imagine that they represent the number of years of formal education obtained my members of our population:
+\item As we talked about in lecture, simple random sampling is the easiest \textit{design-based} strategy for ensuring that your sample data are \textit{representative} of the population from which those observations are drawn. We are not always interested in obtaining such a representative sample (e.g., because we are interested in particular cases or sets of cases) but when we are, we can attempt to construct a representative sample either by:
 
-\begin{verbatim}
-set.seed(1)      # this makes sure we all get the same answer
-x <- sample(0:20, 1e7, TRUE, c(1,2,3,4,5,6,7,8,9,10,11,12,13,12,11,10,9,8,7,6,5))
-\end{verbatim}
-
-\item Use the \texttt{length()} to verify how many people there are in our population.
-
-\item Use \texttt{mean()} to calculate the ``true'' population mean of this population. How many years of education, on average, does this population have?
-
-\item Now, we will draw a small sample from this population using the \texttt{sample()} function. (Note: we used this above to generate some fake population data; now we will use in a different way.). Start by drawing a small sample of just ten observations:
-
-\begin{verbatim}
-s1 <- sample(x, 5, FALSE)
-\end{verbatim}
-
-\item Use \textbf{ggplot2} to draw a histogram of these data:
-
-\begin{verbatim}
-ggplot(, aes(x = s1)) + geom_histogram(bins = 21)
-\end{verbatim}
-
-\item What is the sample mean of this sample?
-
-\item Calculate the element variance of the data: $Var(Y) = s_Y^2 = \sum_{i=1}^{n} \frac{(Y_i - \bar{Y})^2}{n-1}$. In R this is just \texttt{sum((mean(s1) - s1)\^2)/(length(s1)-1)}. Or, more simply, \texttt{var(s1)}. Calculate the element standard deviation (you can use \texttt{sd()}).
-
-\item Now, recall the formula for the standard error of the mean: $SE_{\bar{y}} = \sqrt{\frac{s^2}{n}}$, where $s^2 = $ sample (element) variance, and	$n = $ sample size.\footnote{Note we are sampling a very small proportion of our population, so we ignore the finite population correction.} Calculate the standard error of the population mean for your sample data.
-
-\item Recall the definition of the margin of error. For a typical margin of error, we simply double the standard error to create an interval within which we estimate the population mean to be. What is the margin of error for your sample mean? Is the population mean in your sample mean?
-
-\item Now, repeat the above exercises, but draw a larger sample size of size 100 (call this vector \texttt{s2}). How large is the margin of error of this larger sample compared to that of the smaller sample from before? Why?
-
-\item Recall that the standard error is meant to capture the idea that if we repeated our sampling process and calculated our statistic of interest (in this case, the mean) on each sample, the standard deviation of those estimates around the true mean would be equal to our standard error. To get a better grasp on this idea, we are going to simulate the process of drawing random samples from our population and then compare the standard deviation of our estimates from each sample to the standard errors we calculate above.
-
-\item To do this, we are going to use the \texttt{replicate()} function. This function allows us to repeat a calculate multiple times and return the results in a convenient form. To understand how it works, try generating a single sum of two random numbers: \texttt{rnorm(1) + rnorm(1)}. Then, use \texttt{replicate()} to do this five times:
-
-\begin{verbatim}
-replicate(5, rnorm (1) + rnorm (1))
-\end{verbatim}
-
-\noindent Note how the result is simply a vector.
-
-\item Now, we want to apply this function to the calculation of the sample mean, as above. To do so, we simply write:
-
-\begin{verbatim}
-# five samples of size n = 5
-replicate(5, mean(sample(x, 5, FALSE)))
-
-# 1,000 samples of size n = 5
-dist5 <- replicate(1000, mean(sample(x, 5, FALSE)))
-
-# 100 samples of size n = 100
-dist100 <- replicate(100, mean(sample(x, 100, FALSE)))
-\end{verbatim}
-
-\noindent This vector of sample means is often called the ``sampling distribution'' of the mean. This term refers to the distribution of a given statistic across repeated samples of the same size from a population.\footnote{So hear we focus on the sampling distribution of the mean, but we could also create a sampling distribution for the maximum of each sample, for the count of observations with 10 years of education, the proportion with more than 12 years, etc. The process works the same for any sample statistic, we just focus here on the mean.} Note that these operations may take some time. When they are done, examine the results:
-
-\begin{itemize}
-\item What does the histogram look like: \texttt{ggplot(, aes(x = dist5)) + geom\_histogram(bins = 21)} ?
-\item Are the sample means ``unbiased'' (meaning the mean of the sample means is close to the population mean): \texttt{mean(dist5)} \texttt{mean(dist100)}?
-\item How does the standard deviation of the sample means correspond to the standard errors you calculated above: \texttt{sd(dist5)} and \texttt{sd(dist100)} ?
-\end{itemize}
-
-\item The margin of error is a form of ``interval estimation'' in which we express our uncertainty about the value of a parameter by stating the range of values that the parameter is expected to be in based upon our sample estimate. The interval that is equivalent to estimate +/- 2 times the standard error is also called a 95\% confidence interval (for reasons we will return to below). You can compare the confidence interval from your data (mean +/- 2 SE) to the distribution of estimated sample means (\texttt{quantile(dist100, c(0.025, 0.975))}) to see how closely that interval compares to the interval of estimated values from repeated sampling.
-
-\item To ensure you are comfortable with these ideas, try repeating all of the above but for a different kind of variable. Rather than using an ordinal or interval measure (as above), try using a binary variable. You can create one using \texttt{rbinom()}:
-
-\begin{verbatim}
-# the `prob` argument controls the ratio of 1s and 0s
-y <- rbinom(1000000, 1, prob = .5) 
-\end{verbatim}
-
-
+\begin{enumerate}
+\item Using ``random sampling'' methods to select cases from a population such that our sample will tend \textit{on average} or \textit{in expectation} to match the population's characteristics.
+\item Identifying a set of features (variables) that distinguish cases from one another and selecting cases that vary according to the population distribution of those characteristics, or
 \end{enumerate}
 
-\subsection{Descriptive Statistics}
-
-\begin{enumerate}
-\item For the second major part of this activity, we will look at some real data from the Quality of Government project. This dataset contains country-level data on a very large number of economic, social, health, and political indicators. We will import the data using the \texttt{import()} function from the ``rio'' package. You may need to install this package using: \texttt{install.packages()}. Once the data are loaded, we can examine the data themselves by just confirming that they are loaded correctly:
+The first of today's activities reiterates sampling- or design-based approaches using R. To do this, we are going to examine a population dataset containing the names of all babies born in the United States. This dataset contains the name and sex of every baby in the entire population of US babies born since approximately 1936. The dataset is available as an R package, so we can install and load it as usual:
 
 \begin{verbatim}
+install.packages("babynames")
+library("babynames")
+\end{verbatim}
+
+\item Looking at the first few rows of the data (what you see when you type \texttt{head(babynames)}), what is the \textit{unit of analysis} of the dataset? How many rows are there in the dataset? How many variables? You should note that this is dataset is actually an \textit{aggregation} of the population data: each row is a year--name--sex observation (so the unit of analysis is a name used in a given year for a baby of a given sex). How many unit name--sex combinations are there for 2014?
+
+\item Are there any names that are used for both male and female babies in 2014? Here's the code for one example:
+
+\begin{verbatim}
+babynames[(babynames[["year"]] == 2014) & (babynames[["name"]] == "Skylar"), ]
+\end{verbatim}
+
+\noindent Can you find others? You should be able to, there are 2465 names that appeared for both males and females that year. Hint: the \texttt{duplicated()} function can help you find the answer.
+
+% babynames[babynames[["year"]] == 2014, "name"][duplicated(babynames[babynames[["year"]] == 2014, "name"])]
+
+\item How common is the name Skylar as of 2014? How many males and female babies had this name? You will need to subset the data to find out.
+
+\item Using ggplot2, plot the change in the number of Skylars over time:
+
+\begin{verbatim}
+skylar <- babynames[babynames[["name"]] == "Skylar", ]
+library("ggplot2")
+ggplot(skylar, aes(x = year, y = n)) + geom_line(aes(colour = sex))
+\end{verbatim}
+
+\noindent Are there more male or female Skylars? For fun, examine how the change in other names has played out over time.
+
+\item Now, because the dataset is an aggregation, it isn't exactly in the form we need. We need to \textit{disaggregate} the data to create a dataset where the unit of analysis is an individual person (rather than a year--name--sex aggregation). To do that, we need to create a new data frame such that we create multiple rows based on the count those names in the \texttt{babynames} dataset. Do not try to do this for all years (your computer likely does not have enough memory to do it!), but you should be able to create a new dataset that contains one row per person for every baby born in a given year (e.g., 2014).
+
+To start on that, figure out how many babies were born in 2014. Hint: use \texttt{sum()}. The correct answer is 3,670,151.
+
+\item Our new data frame should therefore have 3,670,151 rows. To create it, we will start by subsetting \texttt{babynames} to only 2014.
+
+\begin{verbatim}
+babynames2014 <- babynames[babynames[["year"]] == 2014, ]
+\end{verbatim}
+
+\noindent Then, we need to know how many of each name--sex combination there are. This is contained in \texttt{"n"} variable of the dataset. Our new data frame will have one row for each person, or said another way \textit{n} rows for each name--sex combination in the babynames2014 subset. We can do that by repeating each row index from \texttt{babynames2014} by the number of babies with that name--sex combination:
+
+\begin{verbatim}
+expand <- rep(seq_len(nrow(babynames2014)), babynames2014[["n"]])
+length(expand)
+dat <- babynames2014[expand, -c(4:5)]
+dim(dat)
+head(dat)
+\end{verbatim}
+
+\noindent The resulting \texttt{dat} data frame should have the intended number of rows, with one row for each of the 3,670,151 babies.
+
+\item How many males and how many females are there in this new dataset? What proportion are male and what proportion are female? You should find that 0.518 (or 51.8\%) are male.
+
+\subsection{Sampling}
+
+\item In practice, we very rarely have the ability to study every case in an entire population. Because of time limitations or other resources, we only investigate a smaller number of individuals. Imagine, for example, if we wanted to study the U.S. population of babies born in a given year, it would be time consuming to contact the families of all 3.7 million of them. If we want to make claims about that entire population, we need to be careful about how we choose which subset to study. We cannot simply take an \textit{arbitrary} subsample and expect it to be representative of the population. Instead, social scientists typically use \textit{random sampling} to select cases from a population. Such random sampling has nice properties, among them (1) the sample will tend to be representative of the population as a whole and (2) it requires relatively small numbers of cases to make very precise claims about unknown or unobserved features of the population based on the information provided by the sample.
+
+\item To showcase this, let's draw a very small sample from this population using the \texttt{sample()} function. Start by drawing a small sample of just ten babies from the 2014 dataset:
+
+\begin{verbatim}
+set.seed(234) # this just keeps our answers consistent
+s1 <- sample(seq_len(nrow(dat)), 10, FALSE)
+dat[s1,]
+\end{verbatim}
+
+\item What proportion of this sample of 10 babies are male? The correct answer is $\hat{p}=0.7$. (it's easy to see this graphically: \texttt{ggplot(dat[s1,], aes(x = sex)) + geom\_bar()}). Is that value, $\hat{p}$, a good \textit{estimate} of the proportion of males in the population as a whole, $p$? Why or why not?
+
+\item Try taking another sample. Indeed, try taking a large number of different samples. How much does the proportion of males, $\hat{p}$ in each sample vary? Here's some code to do it:
+
+\begin{verbatim}
+x <- replicate(15, {
+    prop.table(table(dat[sample(seq_len(nrow(dat)), 10, FALSE), "sex"]))
+})
+x
+\end{verbatim}
+
+\noindent In the above code, \texttt{replicate()} just repeats an R expression the specified number of times.\footnote{For example: \texttt{replicate(5, rnorm (1) + rnorm (1))} returns a vector of five numeric values.} Hopefully you can see that there is considerable \textit{between}-sample variation in the estimated proportion of males, $\hat{p}$. You can see this visually by plotting the estimates from each sample:
+
+\begin{verbatim}
+ggplot(, aes(x = t(x)[,2])) + geom_histogram(binwidth = 0.05)
+\end{verbatim}
+
+\item Clearly the ``point estimate'' from each sample, $\hat{p}$ is not a very good estimate of the true population proportion, $p$. But we know this and consequently, scientists who use random sampling are more interested in what are called ``interval estimates'' that express a range of plausible values of the population parameter, $p$ given the estimate, $\hat{p}$ that we obtained from our sample. Recall our uncertainty about the true value of the population parameter is primarily influenced by three factors\footnote{In \textit{small populations} (those with less than perhaps 1 million cases), we also care about the size of the population ($N$), but that is not relevant here.}:
+
+\begin{enumerate}
+\item The sample size that have drawn from the population ($n$)
+\item The sampling \textit{procedure} (in this case, simple random sampling)
+\item The variance ($Var(Y)$) of the population variable ($Y$) we are interested in
+\end{enumerate}
+
+\noindent We typically summarize our uncertainty about the value of the population parameter, $p$ by a quantity called the ``standard error'' (SE). The SE expresses how much our sample estimates, $\hat{p}$ vary across samples (were we to repeatedly sample from the population). The standard error is meant to capture the idea that if we repeated our sampling process and calculated our statistic of interest (in this case, the proportion of males, $\hat{p}$) on each sample, the \textit{standard deviation} of those estimates around the true proportion, $p$ would be the SE.
+
+The SE can then be used to construct a ``margin of error'' that conveys the interval in which we think the population parameter (the true proportion of males) is likely to be given the sample estimate and how much uncertainty we have due to ``sampling error'' (i.e., the fact that we are not observing the whole population).
+
+\item To get a better grasp on this idea, we are going to draw numerous random samples from our population and then calculate the standard deviation of those estimated proportions, $\hat{p}$ from each sample. The standard deviation of our estimates from repeated sampling is the standard error, $SE(\hat{p})$. Let's repeat our random sampling of 10 babies and calculate the proportion for each sample. We will repeat this sampling procedure 1000 times to produce a vector of 1000 estimated values of $p$ (one estimate per sample of $n=10$):
+
+\begin{verbatim}
+set.seed(123)
+est <- replicate(1000, {
+    prop.table(table(dat[sample.int(nrow(dat), 10, FALSE), "sex"]))[2]
+})
+\end{verbatim}
+
+\noindent The \texttt{est} vector contains each of those 1000 estimated values of $p$. In statistics, were we to repeat this exercise an infinite number of times, the \texttt{est} vector of estimates is what would be called the ``sampling distribution'' of the estimate. This term refers to the distribution of a given statistic across repeated samples of the same size from a population.
+
+\item When you have the \texttt{est} vector (note it may take some time to compute), examine the results:
+
+\begin{itemize}
+\item What does the histogram look like:\\ \texttt{ggplot(, aes(x = est)) + geom\_histogram(binwidth = 0.05)}
+\item Are the sample proportions ``unbiased'' (meaning the mean of the sample estimates, $\hat{p}$ is close to the population proportion, $p$): \texttt{mean(est)}?
+\item How much do they vary? What is the standard deviation of the estimates (i.e., the SE)? 
+\end{itemize}
+
+\noindent You should find that the answer to the last question is 0.154. This value tells us how much \textit{sampling variation} there is in the estimated $Pr(Male)$ across the 1000 samples. Try plotting the $\hat{p}$ estimates as a histogram to see how the estimates vary.
+
+\item If we change the sample size, the SE will change. Larger samples produce smaller SEs (to the point that if we sample all units in the population, the SE is 0). Repeat the above exercise but use a larger sample size ($n=20$):
+
+\begin{verbatim}
+est <- replicate(1000, {
+    prop.table(table(dat[sample.int(nrow(dat), 20, FALSE), "sex"]))[2]
+})
+sd(est, na.rm = TRUE)
+ggplot(, aes(x = est)) + geom_histogram() + xlim(c(0,1))
+\end{verbatim}
+
+\noindent How large is the SE for this sample size of $n=20$?
+
+\item Repeat the above exercise but for several larger sample size ($n=50$, $n=100$, $n=1000$). How large is the SE for each sample size? For $n=1000$, your answer should be in the neighborhood of 0.015.
+
+\item Indeed, when we have access to population data we can calculate this SE without ever drawing any samples because the SE is simply a function of the variance of the population variable and the size of the samples.\footnote{Again, in small populations, it is more complicated, but most populations are large.} The formula is simply: $\sqrt{\dfrac{Var(Y)}{n}}$. Because $Y$ is a binary variable in this case, $Var(Y)$ is very easy to calculate, it is simply: $Var(Y) = p(1-p)$. In R we can calculate that as:
+
+\begin{verbatim}
+prod(prop.table(table(dat[["sex"]])))
+\end{verbatim}
+
+\noindent This is about 0.25. The SE of our estimated proportion of males for a given sample size is thus simply the square root of 0.25 over sample size. In R, we can calculate that for a range of different sample sizes that we've considered ($n = {10,20,50,100,1000}$):
+
+\begin{verbatim}
+sqrt(0.25/c(10,20,50,100,1000))
+\end{verbatim}
+
+\noindent The resulting numbers should closely correspond to the ``true'' SEs that we calculated earlier using the standard deviation of the sample estimates.
+
+\item In practice, we do not typically draw multiple samples so we do not actually know how much our estimates would vary, nor do we observe the population data so we do not know what $Var(Y)$ is. Statisticians get around this by using the sample data to estimate $\widehat{Var}(Y)$ using the ``sample element variance''\footnote{For a numeric variable, the element variance of the data would be $Var(Y) = s_Y^2 = \sum_{i=1}^{n} \frac{(Y_i - \bar{Y})^2}{n-1}$, which can be calculated by \texttt{var()} in R.}:
+
+\begin{verbatim}
+prod(prop.table(table(dat[sample.int(nrow(dat), 20, FALSE), "sex"])))
+\end{verbatim}
+
+\noindent This is imperfect, of course, but allows us to calculate the SE from only one sample and therefore be able to make statements of uncertainty about the value of $p$ knowing only $\hat{p}$ and the estimated SE.
+
+\item In particular, we often report what is known as the ``margin of error'' or ``confidence interval'' for the population parameter. This conveys a range of possible values where we would expect the population parameter to be, centered around our estimated value $\hat{p}$. For a typical margin of error, we simply double the standard error and add and subtract that value to $\hat{p}$ to create an interval within which we estimate $p$ to be (i.e., $\hat{p} +/- SE(p)$). What is the margin of error for the proportion of males for a sample of $n=1000$? Is the population proportion (0.518) within the estimated margin of error (i.e., within the confidence interval)? Repeat this exercise for different sample sizes and check your understanding.
+
+\item The interpretation of confidence intervals can be quite complicated. The key idea is that a confidence interval communicates, first, the amount of variation that one would expect to see in the estimates drawn from samples of this size from this population. But because the population parameter (in this case, the proportion of males) is estimated from the sample data, the interval does not \textit{for sure} include the true population parameter of interest. Indeed, there is a non-zero chance that the confidence interval does not include the true population parameter value (i.e., the true proportion of males) and this is invariant to the size of the sample. It is not essential that you understand this yet --- we will spend a whole week (LT 7) on it --- but it's good if you start to think a bit about how sampling generates estimates that carry potentially considerable uncertainty about the population to which we claim interest in generalizing to.
+
+
+\item The key intuition to derive from that interpretation is that a given sample may be highly ``biased'' (i.e., it may not resemble the population particularly well with respect to any variable). Yet, ``design-based'' claims to representativeness are premised upon the fact that a statistic estimated on multiple, repeated samples of the same size, drawn in the same way will \textit{on average} be correct. Taking the mean of the proportions (or any statistic) estimated from many repeated samples will, as the number of samples increases, be the true population proportion. Any given sample is likely bias, so any estimated values must be communicated with measures of uncertainty that convey the variation we would expect across those many sample estimates were we to actually do that repeated sampling (which is something we rarely ever do).
+
+This can be a bit confusing, but it is an important matter to understand because design-based, random sampling generates samples that --- on average --- are representative of the population with respect to \textit{every} variable, even those that we do not measure or that are unobservable. A random sampling process will always, if repeated, generate on average representative subsets of the population as a whole! And that conclusion is the core insight of statistics.
+
+
+
+\subsection{Check Your Understanding}
+
+\item The previous activities were all focused on estimating the value of a single population parameter, namely the proportion of males born in a given year. As a check on your understanding of both substance and the R implementation, it is worth attempting to estimate other population parameters, possibly on other subsets of the data. For example, you might try to do the same for the following population parameters:
+
+\begin{itemize}
+\item The proportion of males named Benjamin
+\item The proportion of all names that start with ``A''
+\item The proportion of all babies named Olivia (across all years) that were born in 2010.
+\item The proportion of all babies named Liam (across all years) that were born after 1980.
+\item etc.
+\end{itemize}
+
+\noindent For each parameter, calculate the true population quantity from the original data and the true population element variance. Then calculate the standard error and margin of error for a sample of a given size. You may want to try to calculate how large of a sample size you would need to be able to estimate that quantity of interest from to within a particular degree of precision (e.g., within 1 percentage point).
+
+Note: One thing that may be particularly important to consider is how a given sample may yield a reasonable estimate of one population parameter but not a very good estimate of other population parameters. In small samples, something like the proportion of people in the population with a given name may easily be estimated to be 0 (because no one in the sample takes that name) even though the true population proportion of people with that name is non-trivial. In practicing these techniques it is important to remember this because we rarely collect data to only estimate one population parameter and instead typically estimate many parameters from one sample.
+
+
+\subsection{Model-Based Representativeness}
+
+All of the material thus far has discussed ``design-based'' sampling, wherein our claims to representativeness can also be premised on what we might call ``model-based'' ideas. A model in this case is simply a formal claim about the features of particular cases that matter for drawing inferences from a particular set of cases to some other set of cases (such as the population as a whole).
+
+In design-based sampling, our ability to draw inferences to the population are not premised on any particular features of cases being important; instead, generalizability to the population is based upon the idea that if we repeatedly sampled, our samples would on average resemble the population with respect to every possible variable.
+
+Model-based claims to representativeness or external validity, by contrast, require asserting what features (i.e., scores on variables) are important for making such claims. For example, a very naive model would be that sex is the only variable that matters; in essence, all men are the same and all women are the same, so information about any particular man is perfectly representative of features of all men. This is, obviously, problematic. Yet a more complex model (perhaps one incorporating many variables, such as age, education, national origin, personality traits, ideology, etc.) might much more credibly segment the population into groups that are relatively homogeneous. 
+
+If true, then claims about a particular ``cell'' or ``stratum'' in the population (e.g., white English men from North London who are single, educated at the LSE, 24 years old, work in finance, are somewhat narcissistic, and generally left-wing) might be more convincingly made based upon information obtained from just a few arbitrarily (as opposed to \textit{randomly}) chosen individuals from that cell. Such arguments are premised entirely on the credibility of the model linking the particular cases being studied to the population (i.e., that all relevant variables have been identified that make cases different from one another in the population).
+
+
+
+\subsection{Further Practice with Descriptive Statistics}
+
+As some additional practice working with data in R, we will look at some real data from the Quality of Government project, which contains country-level data on a very large number of economic, social, health, and political indicators. Beyond the basic exercises here, you may wish to apply the sampling techniques from above to these data in order to apply and test your knowledge using a more politically relevant dataset.
+
+\item We will import the data using the \texttt{import()} function from the \textbf{rio} package. Once the data are loaded, we can examine the data themselves by just confirming that they are loaded correctly:
+
+\begin{verbatim}
+# install.packages("rio")
 library("rio")
-d <- import("http://www.qogdata.pol.gu.se/data/qog_std_cs_jan16.dta")
+d <- import("http://www.qogdata.pol.gu.se/data/qog_std_cs_jan17.dta")
 dim(d)
 nrow(d)
 ncol(d)
@@ -136,7 +263,7 @@ summary(d$bl_asy15f)   # female educational attainment
 
 \item To assess the dispersion of each variable, use the functions we used above: \texttt{var()} and \texttt{sd()}.
 
-\item If you're feeling ambitious, you can create some of your own (``user-defined'') functions to calculate the skew and kurtosis statistics described by Kellstedt and Whitten:
+\item If you're feeling ambitious, you can create some of your own (``user-defined'') functions to calculate the skew and kurtosis statistics described in lecture:
 
 \begin{verbatim}
 skew <-  function(x) {
@@ -216,7 +343,8 @@ d$cname[is.na(d$bl_asy15f)]  # for educational attainment
 \item You may want to adjust the axis scales using, for example:
 
 \begin{verbatim}
-ggplot(d) + aes(x = gle_cgdpc, y = bl_asy15f) + geom_point() + scale_x_log10()
+ggplot(d, aes(x = gle_cgdpc, y = bl_asy15f)) + 
+  geom_point() + scale_x_log10()
 \end{verbatim}
 
 \item You can modify the appearance of the plot in many, many ways. A common way to do this is by adding \texttt{aes()} features (see \texttt{? aes}) or by changing the plot theme (see \texttt{? theme}). Experiment with different plots until you feel comfortable with the various options.
@@ -224,7 +352,8 @@ ggplot(d) + aes(x = gle_cgdpc, y = bl_asy15f) + geom_point() + scale_x_log10()
 \item One useful feature of ggplot2 is the ability to create multiple ``panels'' or ``facets'' (visual designer Edward Tufte calls these ``small multiples''). To do this, you use the \texttt{facet\_wrap()} function and specify a ``formula'' including the variable you would like to split the data by. This example create subpanels for different regions of the world:
 
 \begin{verbatim}
-ggplot(d) + aes(x = gle_cgdpc, y = bl_asy15f) + geom_point() + facet_wrap(~ht_region)
+ggplot(d) + aes(x = gle_cgdpc, y = bl_asy15f) + 
+  geom_point() + facet_wrap(~ht_region)
 \end{verbatim}
 
 \item Pause for a moment to consider how each facet represents a subset of the dataset. In this way, each facet is a summary of the dataset for only a subset of the dataset. If we want to summarize data in this way without plotting, we might consider using the \texttt{aggregate()} function. For example to calculate the mean level of GDP by region, you can do:
@@ -234,204 +363,6 @@ aggregate(gle_cgdpc ~ ht_region, data = d, FUN = mean)
 \end{verbatim}
 
 \noindent Try this aggregate command using different variables and using a different value of the \texttt{FUN} argument (which takes the name of a function, such as \texttt{mean}, \texttt{sd}, etc. without the parentheses) until you feel comfortable with the process of generating data summaries.
-
-
-
-\end{enumerate}
-
-\subsection{Statistical Significance}
-
-\begin{enumerate}
-
-\item For the final activity, we will examine the idea of ``statistical significance.'' Statistical significance is a concept related to \textit{statistical} hypothesis testing. If you recall from much earlier in the course (MT Week 6), we discussed two different ``flavours'' of hypothesis testing --- one associated with Fisher and one associated with Neyman and Pearson. We will see how both kinds of hypothesis testing manifest and how current statistical practice is a blend of these two perspectives. That practice most closely approximates Fisher's ideas (the calculation of a $p$-value) but differs in other ways (the estimation of a ``confidence interval'').
-
-\item To develop an initial understanding of the idea of statistical hypothesis testing, we will think about the idea of ``outliers.'' Outliers are unusual values in a variable (or set of variables). For example, consider the following variable:
-
-\begin{verbatim}
-v <- c(1,1,1,1,2,2,2,2,2,3,3,3,3,10)
-\end{verbatim}
-
-\noindent It should be clear that the value 10 here is an outlier. If we draw a boxplot of this variable, it becomes even more clear:
-
-\begin{verbatim}
-ggplot(, aes(x = 1, y = v)) + geom_boxplot() + scale_y_continuous(limits = c(0,12))
-\end{verbatim}
-
-\item If we expected all the values of \texttt{v} to be relatively similar, we could point out that the value 10 is more than 3 standard deviations away from the mean of the variable: \texttt{(10-mean(v))/sd(v)}. This idea that a value is an outlier relative to some assumed central tendency is the basic logic of statistical hypothesis testing.
-
-\item In statistical hypothesis testing, however, we are instead interested to know how unusual a \textit{statistic} is relative to our baseline expectation of what the value of the statistic should be. Thus instead of looking at the values of each observation in a variable and looking for how unusual they are, we want to know how unlikely we are to see a given statistic in our sample of values. But how do we determine whether a statistic is unusual? To figure that out, we have to describe --- in Fisher's language --- a a ``null hypothesis.'' This is a value that we think the parameter might have in the population. Often, the null hypothesis is set to something that would be theoretically uninteresting: a proportion is 0.5, a difference between two means is 0, a correlation between two variables is 0, the mean of a variable is 0, etc. We can pick any value, but these theoretically uninteresting values are conventional. We are therefore trying to see whether the statistic in our sample data differs from this (hypothetical) null population parameter.
-
-\item But how do we know if our statistic differs from the null hypothesis value? We are worried that a difference between our sample statistic and the null hypothesis value might be erroneous. For example, we have a small sample so our data appear to differ from the null hypothesis but if we collected more observations the sample statistic on this larger sample might be closer to our null hypothesis for the population parameter. Statistical hypothesis testing therefore asserts that we only consider a sample statistic to differ from a null hypothesis value when it is quite far from the null hypothesis value. But how far exactly is ``quite far''?
-
-To decide that, we return to the idea of repeated sampling that we examined earlier. We consider a difference ``statistically significant'' when it differs more from our null expectation than the variation in sample statistics we would expected to observe across repeated samples were our null hypothesis true (in this case, that there were actually no difference between the groups). For a mean (like the one we looked at earlier), this would be stated as a null expectation that the mean level of education in a country is 12 years. If we collect a sample of data and find that the mean is different from 12, we would consider that mean to be statistically significantly different from our null expectation of 12 years if the sample mean was further from 12 (i.e., much larger or much smaller) that the variation in sample means we could to estimate from same-sized samples drawn from a population where the true mean was 12.\footnote{If we were talking about a different statistic, the logic would be the same. For a proportion, we might have a null expectation that the proportion is 0.5. An observed proportion in our data would be considered statistically significantly different from 0.5 if the proportion were larger than the variation in estimated proportions we would see across multiple same-sized samples from a population where the parameter was 0.5.} 
-
-\item Return to our vector of education values, \texttt{x}, from earlier and to our set of sample means of size 100 from that population, \texttt{dist100}. What is the standard deviation of the sampling distribution \texttt{dist100} (i.e., what is the standard error of the sample mean)? In statistical hypothesis testing, we will say that an estimate is statistically significantly different from the null hypothesis value when the sample statistic is more than a certain number of of standard errors away from the null hypothesis value. But how far is far enough to be considered \textit{significant}? Take a look at how many observations in our \texttt{dist100} vector are more than 3 standard errors, more than 2 standard errors, and more than 1 standard error above or below the true mean of \texttt{x}:
-
-\begin{verbatim}
-dist100[dist100 > (mean(x) + 3*sd(dist100))]
-dist100[dist100 > (mean(x) + 2*sd(dist100))]
-dist100[dist100 > (mean(x) + 1*sd(dist100))]
-dist100[dist100 < (mean(x) - 3*sd(dist100))]
-dist100[dist100 < (mean(x) - 2*sd(dist100))]
-dist100[dist100 < (mean(x) - 1*sd(dist100))]
-\end{verbatim}
-
-\noindent Many sample means are within 1 standard error of the mean, fewer of them are further than 1 standard error from the population mean, even fewer are further than 2 standard errors, and --- in this example --- none or almost none are further than 3 standard errors from the mean. Thus when we repeatedly sample from this population, it is unusual to see a sample statistic more than 2 standard errors from the population mean and even more unusual to see a statistic more than 3 standard errors from the population mean.
-
-\item Now here is where a short moment of consideration is required before we proceed. In statistical hypothesis testing, we are declaring a null hypothesis value as a \textit{known} population and seeing how likely different sample estimates are when draw repeated random samples from that population. We declare a sample statistic ``statistically significant'' when the sample statistic is an outlier in that distribution because it would seem to suggest that the sample is drawn from a population with a different population parameter value one with a population parameter equal to the null hypothesis. In other words, the sample statistic is so unusual for a the population from which we --- under the null hypothesis --- believe that the data are drawn from, that we decide that the data are actually drawn from a population with a different population mean. That's the essence of statistical hypothesis testing.
-
-But, there's a leap being made here: in practice we don't generally have population data in front of us. We don't actually know the population mean (or any population parameter), so we can't draw repeated random samples from the population to create a sampling distribution. We just have the data in front of us. So, if we set a null expectation of the population parameter value and find that our sample statistic differs from that considerably, we are inclined to ``reject the null hypothesis'' and believe the population parameter value is different from our null expectation. But, this judgment is based on seeing a sample statistic that is \textit{unusual}, not \textit{impossible}, under the null hypothesis. We might therefore reject the null hypothesis sometimes when the population parameter actually is equal to the null hypothesis value. To avoid doing this too often, we have to define an ``error rate'' or ``significance level'' that only allows us to make these kind of ``false positive'' judgments quite rarely.
-
-\item We'll call this significance level $\alpha$ in order to explore different possible values and what consequences that has for the probability of obtaining a ``false positive.'' A commonly used value of $\alpha$ is 0.05. This means that we will only declare a sample statistic to be ``statistically significant'' when it is as far or farther from the null hypothesis value as 5\% of the possible sample statistics generated from random samples from a population with a parameter equal to the null hypothesis value. In essence, we're looking for an outlier statistic that is farther than the 2.5\% percentile or 97.5\% percentile of the sampling distribution. If we look at our sampling distribution, we can see how far a sample statistic would have to be in order for us declare it statistically significantly different from the population mean:
-
-\begin{verbatim}
-quantile(dist100, c(0.025, 0.975))
-\end{verbatim}
-
-\noindent Check your understanding by assessing why these particular quantiles are used when $\alpha = 0.05$. Those quantiles reflect a ``two-tailed'' hypothesis test in which we look to see whether a sample statistic is an outlier in either direction. What quantiles would we consider if we were doing a ``one-tailed'' hypothesis to see if the sample statistic was an outlier only on the upper end of the distribution? only on the lower end of the distribution?
-
-\item Different values of $\alpha$ are possible. Small values mean we want a lower chance of a ``false positive'' judgment, at the expense of making many for ``false negatives'' (judgments where we say a sample statistic is consistent with the null hypothesis when in fact it is drawn from a different population). Try some different values. Why are these two rates (false positives and false negatives) trade-offs?
-
-\item But recall, we rarely have access to the population mean and we rarely have the ability to repeatedly sample from a population in order to create a sampling distribution. We therefore rely on ``distributional'' assumption. Rather than generating a sampling distribution from repeatedly sampling, rely on a mathematical theorem --- the central limit theorem --- that shows that the sampling distribution of the mean is normally distributed. You can get a sense of this by repeating our repeated sampling exercise above by collecting more samples. The more samples we draw from the population, the more and more the shape of the sampling distribution will resemble the normal distribution's bell curve:
-
-\begin{verbatim}
-ggplot(, aes(x = replicate(100, mean(sample(x, 10, FALSE))))) +
-    geom_histogram(bins = 21)
-ggplot(, aes(x = replicate(500, mean(sample(x, 10, FALSE))))) +
-    geom_histogram(bins = 21)
-ggplot(, aes(x = replicate(5000, mean(sample(x, 10, FALSE))))) +
-    geom_histogram(bins = 21)
-\end{verbatim}
-
-\noindent This property enables us to calculate how unusual a sample estimate is against a null hypothesis by simply calculating the probability of seeing different statistic values given the normal distribution (which has a well-defined formula). In R we can calculate these probabilities using the \texttt{pnorm()} function. If we are thinking about sample means, we can calculate the probability of different sample means against any particular null hypothesis parameter value. To do so, however, requires that we express the mean as a difference from the null hypothesis value and rescale to the scale of standard errors. In our example, we have to convert the sample mean to number of years different from the population mean and then rescale to units in number of standard errors: i.e., from \texttt{mean(s2)} to 
-
-\begin{verbatim}
-tstat <- (mean(s2) - mean(x)) / ( sd(s2)/sqrt(length(s2)) )}
-\end{verbatim}
-
-\noindent This value is called a $t$-statistic. If we had a different null hypothesis value (e.g., that the population mean was 3), we would use that instead of \texttt{mean(x)} in the above calculation.
-
-\item To see how unusual this $t$-statistic is, we plug it into the \texttt{pnorm()} function: \texttt{pnrom(tstat)}. The output is called a $p$-value and can be understood as the probability of seeing a test statistic this far or farther from the null hypothesis value. Formally, it is ``the probability of a $t$-statistic as extreme as the one we observed, if the null hypothesis was true.'' When this p-value is smaller than $\alpha$ level, we judge the sample mean to be ``statistically significantly different from zero.'' When the $p$-value is larger than $\alpha$, we declare that the test statistic is not statistically significantly different from the null hypothesis value. However, it is important to remember when reading this that:
-
-\begin{itemize}
-\item The probability that a hypothesis is true or false
-\item A reflection of our confidence or certainty about the result
-\item The probability that the true mean is in any particular range of values
-\item A statement about the importance or substantive size of the effect
-\end{itemize}
-
-\noindent Those are all common misconceptions of how to interpret a $p$-value.
-
-\item To see how large a $t$-statistic has to be to cross different $\alpha$ levels, you can explore the \texttt{qnorm()} function, which takes a $p$-value as input and returns the corresponding $t$-statistic.\footnote{Note: We are being a bit lose here. Technically, \texttt{qnorm()} looks at the normal distribution, but in very large samples, the normal distribution and the $t$ distribution are identical.}
-
-\begin{verbatim}
-qnorm(0.025) # 5% significance level
-qnorm(0.05)  # 10% significance level
-qnorm(0.33)  # 33% significance level
-qnorm(0.25)  # 50% significance level
-\end{verbatim}
-
-\item We now come to the idea of a ``confidence interval,'' which is an interval estimate like the interval created by calculating a margin of error as in the first part of this lab activity. A confidence interval (or ``CI'') is simply a range, centered on our sample estimate that tells us about the likely location of the population parameter within a stated range of uncertainty.\footnote{Because it is just a transformation of the margin of error, it is based on the variability of the data, sampling procedures, and --- most importantly --- sample size.} To formalize this, a confidence interval tells us:
-
-\begin{quote}
-Were we to repeat our procedure of sampling, analyzing the sample to produce a sample estimate and standard error, and transforming those estimates into a confidence interval \textit{repeatedly} from the population, a fixed percentage of the resulting intervals would include the true population-level parameter.
-\end{quote}
-        
-\noindent This does not say for sure whether the estimated confidence interval \textit{this time} actually includes that true population parameter.
-
-\clearpage 
-
-\item To get at the notion of the confidence interval, we are going back to our population data \texttt{x} and repeatedly drawing new samples. This time, however, we are going to store our results in a data.frame and we are going to save not only how far the sample mean deviates from the population mean, but we are also going to save the standard error calculated from each sample:
-
-\begin{verbatim}
-alpha <- qnorm(0.025) # 5% significance level; 95% confidence interval
-
-n <- 100  # number of samples to draw and estimate statistic on
-ci <- data.frame(i = 1:n,
-                 means = numeric(n),
-                 se = numeric(n),
-                 off = logical(n))
-for (i in 1:n){                             # Take 100 samples from our distribution
-  tmp <- sample(x, 100, replace=FALSE)      # Store samples in `temp`
-  ci$means[i] <- mean(tmp)-mean(x)          # calculate and store mean
-  ci$se[i] <- (sd(tmp)/sqrt(length(tmp)))   # calculate and store upper CI limit
-}
-\end{verbatim}
-
-\noindent You can explore this new object, \texttt{ci}, perhaps using \texttt{summary(ci)}.
-
-\item What we have generated here is a data.frame of ``centered'' sample means: we are expressing how far our sample mean is from the population mean. This allows us to calculate a so-called ``confidence'' interval. A confidence interval is an interval --- recall how we have already encountered it in the form of a margin of error --- that attempts to provide information about the location of the true population value. The confidence interval is sized based upon the variability of our data, the size of the sample we draw, and $\alpha$. The choice of $\alpha$, as in the rest of statistical hypothesis testing, is important because it dictates our error rate. 
-
-When we set the width of the confidence level as $1-\alpha$, we are saying we will allow $\alpha$ proportion of our confidence (where we to sample an infinite number of times) to not include the true population parameter. If $\alpha = 0.05$, then we are drawing 95\% confidence intervals. Thus only 5\% of the intervals we draw from this sample are likely to ``miss'' the true population parameter. If we therefore find in our particular sample that the interval differs from our null expectation (e.g., the sample mean does not equal zero and the 95\% confidence interval based upon our sample data does not cover 0), then we would say the sample mean difference is statistically significantly different from zero. (The $p$-value in this case would be less than 0.05.) So this either indicates that the population parameter is truly not equal to zero or that our particular sample happens to have produced one of the 5\% of confidence intervals that are expected (given our sampling procedure, sample size, and $\alpha$ level) to not cover the true population parameter, simply due to chance. We cannot know with certainty which interval we have.
-
-How many of our confidence intervals do not cover the population mean? (Recall we have rescaled the mean to be a different from the true value.):
-
-\begin{verbatim}
-ci$off <- ((ci$means-(abs(alpha)*ci$se)) > 0 & (ci$means+(abs(alpha)*ci$se)) > 0) | 
-          ((ci$means-(abs(alpha)*ci$se)) < 0 & (ci$means+(abs(alpha)*ci$se)) < 0)
-table(ci$off)
-\end{verbatim}
- 
-\item We can graph all of our confidence intervals to see which include the true mean and which do not (colored by the \texttt{off} variable we just generated):
-
-\begin{verbatim}
-ggplot(ci, aes(x = i, y = means, colour = off)) + 
-    geom_errorbar(aes(ymin = (means - alpha*se), 
-                      ymax = (means + alpha*se)), width=.1) + 
-    geom_point() + coord_flip()
-\end{verbatim}
-
-\noindent This exercise shows that if a particular parameter value is true (in this case, the population mean is zero), we can draw confidence intervals for that mean to try to estimate where the mean is located. Most of these intervals will ``cover'' the true population parameter value, but not all of them. The number that cover the true population parameter value depends on the width of the confidence interval we draw. If we draw a wider confidence interval (say 95\%), then 95\% of the confidence intervals drawn from samples of this size from the population will cover the true population parameter value. If we draw a narrower confidence interval (say 50\%), then only 50\% of the confidence intervals drawn from samples of this size from the population will cover the true population value. 
-
-\item Try to repeat the above sampling and graphing procedure but tweak the values of $\alpha$ and sample size. As $\alpha$ increases, fewer of the confidence intervals drawn from the population with cover the true population parameter. That means that we are more likely to make ``false positive'' judgments and to have incorrect beliefs about the location of the population parameter.
-
-\item We can also see, in the above data, the equivalence of a confidence interval, a $t$-statistic, and a $p$-value. When our confidence interval does not overlap the null hypothesis value, we describe it as statistically significant. The $p$-value is generated from a ``test statistic'' which translates our statistic (in the above example, the sample mean). For a sample mean, the $t$ statistic is simply the sample mean divided by the standard error. In our data that would be:
-
-\begin{verbatim}
-ci$mean / ci$se
-\end{verbatim}
-
-\noindent When this test statistic exceeds the critical value, $\alpha$, then the statistic is deemed statistically significantly different from the null hypothesis value. The critical value is simply based on a hypothetical distribution, in this case the $t$-distribution (which, in large samples, is identical to the normal or Gaussian distribution noted earlier). When we earlier selected a value of $\alpha$ we were in essence setting the critical value of our $t$-statistic. Recall for our 95\% confidence interval, we selected an $\alpha$ value of \texttt{qnorm(0.025)} (approximately 1.96). Thus, when our sample $t$-statistic exceeds this value, then we have a statistically significant result because our test statistic is very far from the null hypothesis value of 0. Our null hypothesis implies a distribution of test statistics that follows the $t$ distribution and, given that expected distribution of possible test statistics, a sample test statistic larger than 1.96\% would be quite rare (less than 5\% of test statistics observed for samples from a population of mean 0 would have test statistics that large or larger).
-
-\item This $t$-statistic can then be translated into the $p$-value: \texttt{1-pnorm(1.96)}\footnote{Here we see a ``two-tailed'' hypothesis test. We are allowing the test statistic to differ from the null expectation in either direction (see \texttt{1-pnorm(1.96)} and \texttt{pnorm(-1.96)}).} We can calculate the p-values for the $t$-statistic from each of our samples as:
-
-\begin{verbatim}
-pnorm(ci$mean / ci$se)
-\end{verbatim}
-
-\noindent You should now clearly be able to see a correspondence between $t$-statistics, the confidence intervals, and the $p$-values for each of the samples. The $t$-statistics are large when the confidence interval does not overlap zero:
-
-\begin{verbatim}
-cbind.data.frame(ci$means/ci$se, ci$off)
-\end{verbatim}
-
-\noindent and the $p$-value for each sample is small in those same cases.
-
-
-\item Returning to the QoG data from earlier, apply what we've just learned to assess whether the mean years of female educational attainment differ from a null hypothesis value. You can do this quickly in R using the \texttt{t.test()} function, where \texttt{mu} is the value of your null hypothesis:
-
-\begin{verbatim}
-t.test(d$bl_asy15f, mu = 12)
-\end{verbatim}
-
-\noindent Try out different possible values of \texttt{mu}.
-
-\item A further test we might be interested in is whether countries' average educational attainment for men differs from the educational for women. This is what is known as a two-sample $t$-test. Like exercise we just performed to generate confidence intervals, this is based on a null hypothesis about the mean-difference, typically that the difference between two group means is zero. Try it out:
-
-\begin{verbatim}
-t.test(x = d$bl_asy15f, y = d$bl_asy15m)
-\end{verbatim}
-
-\item Another further test we might be interested in is whether two subsets of cases differ from one another. To capture this, we can also use \texttt{t.test()}, this time with a formula notation. For example we might test whether the countries with high and low levels of democracy differ in female educational attainment:
-
-\begin{verbatim}
-dem_high <- factor(d$fh_polity2 > mean(d$fh_polity2, na.rm = TRUE))
-t.test(d$bl_asy15f ~ dem_high)
-\end{verbatim}
-
-\item Try to interpret all of the above results.
-
-\item A major caveat in any discussion of \textit{statistical} significance is that we can never forget \textit{substantive} significance. Statistical significance tells us whether an estimate, a relationship, or an effect is large relative to a hypothetical distribution of test statistics corresponding to null expectation. This says nothing about whether that effect is large or important in substantive terms.\footnote{If we have enough data (i.e., our sample is large enough), almost any test statistic will ``statistically significant'' but that does not mean that the estimated parameter is large or important.} If we find that democracy and non-democracies differ by \$50 in per capita GDP that this difference is statistically different from zero, that is a statistically significant difference. Whether that difference is large or important depends upon the state of broader scientific understanding, the amount of dispersion in the data (is the difference large if measured in number of standard deviations), the size of other differences (do regions of the world vary more than one another on this variable), the research context, and our own judgment. \$50 may be a substantively small effect when talking about GDP but it may be a large effect when talking about the cost of tonight's dinner. This is something for you to consider.
 
 
 \end{enumerate}

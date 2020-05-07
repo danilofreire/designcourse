@@ -1,7 +1,10 @@
+\documentclass[17pt]{beamer} %Makes presentation
+%\documentclass[handout, 17pt]{beamer} %Makes Handouts
 \input{preamble}
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows}
 \usepackage[normalem]{ulem}
+\usepackage{multicol}
 
 \title{Translating Texts into Interpretations and Numbers}
 
@@ -15,26 +18,48 @@
 
 \frame{\titlepage}
 
-\frame{\tableofcontents}
-
 \frame{
 
 \frametitle{Preview}
 
 \begin{itemize}\itemsep1em
-\item Three weeks on data collection
+\item Two weeks on data collection
 	\begin{itemize}
 	\item Text analysis
-	\item Interviewing
-	\item Participant Observation
+	\item Interviewing methods
+	\end{itemize}
+\item Problem Set 3
+	\begin{itemize}
+	\item Due November 21
 	\end{itemize}
 \item Problem Set 4
 	\begin{itemize}
-	\item Due December 15
-	\item Team assignment
+	\item Discuss in class next 2 weeks
+	\item Due December 5
 	\end{itemize}
 \end{itemize}
 
+}
+
+\frame{\tableofcontents}
+
+\frame{
+	\frametitle{Research Proposal}
+	\begin{itemize}\itemsep1em
+	\item<1-> This is a \textit{prospectus}
+		\begin{itemize}
+		\item Introduction
+		\item Theoretical literature review
+		\item Plan of data collection
+		\item Planned analysis
+		\item Reflective, critical conclusion
+		\end{itemize}
+	\item<2-> Presentations are intended for feedback
+		\begin{itemize}
+		\item You can change your topic later
+		\item Please also use office hours
+		\end{itemize}
+	\end{itemize}
 }
 
 
@@ -47,95 +72,97 @@
 \frametitle{What counts as text?}
 
 \begin{itemize}\itemsep1em
-\item Tertiary sources
-\item Secondary sources
 \item Primary sources
+	\begin{itemize}
+	\item Raw, original evidence
+	\end{itemize}
+\item Secondary sources
+	\begin{itemize}
+	\item Interpretations of raw evidence
+	\end{itemize}
+\item Tertiary sources
+	\begin{itemize}
+	\item Compendia or indices of two other types of sources
+	\end{itemize}
 \end{itemize}
 
 }
 
-% tertiary: compendia or indices of two other types of sources
-% secondary: interpretations of raw evidence
-% primary: raw evidence
-
-% brainstorm examples
-
-
-\frame{
-
-\frametitle{How do you use texts?}
-
-\small
-
-\begin{itemize}\itemsep0.75em
-\item Think about your own experience reading, interpreting, and interacting with textual sources for academic purposes (e.g, for writing a term paper).
-\item With the person sitting next to you, discuss:
-	\begin{enumerate}
-	\item The process by which you try to understand the meaning and content of texts
-	\item How you choose texts to read
-	\end{enumerate}
-\end{itemize}
-
-}
 
 \frame{
 
 \frametitle{Use of Texts}
 
 \begin{itemize}\itemsep1em
-\item<1-> Text as desription
+\item<1-> Text as description
 	\begin{itemize}
 	\item Rely on text in lieu of direct observation
-	\item Possibly serve as basis of CPO
+	\item What do we gain? What do we lose?
 	\end{itemize}
 \item<2-> Text as DSOs
 	\begin{itemize}
-	\item Treat texts as units
+	\item Treat texts as units of analysis
+	\item What do we gain? What do we lose?
 	\end{itemize}
 \end{itemize}
 
 
 }
 
-% texts in lieu of observation
-% we cannot see everything ourselves, so we rely on evidence
-
-% texts as CPOs vs. DSOs
-
 \frame{
 
 \frametitle{Challenges of Text}
 
 \begin{enumerate}\itemsep1em
-\item Subjectivity
+\item Source ``Quality''
+\item Subjectivity and differing perspectives
 \item Historiography
-\item Selection bias
+\item Selection and confirmation bias
 \end{enumerate}
+
+\onslide<2->{But these are really the challenges of \textit{any} research!}
 
 }
 
 
-% selection bias -> when do we stop looking for evidence?
-% -> how do we know that we have all of the evidence?
-% -> If we go looking for information about a case as something, do we miss evidence that sees that case as a case of something else?
-
-% define historiography
-
-% texts are subjective
-
-% what is this a case of 
-
-% research questions and text: 
-%% at one level, texts can be used to answer any research question
-%% there are, however, a lot of interesting research questions that are about text per se
-
-% unit of analysis???
-% text, paragraph, sentence
-% multiple texts that represent some larger unit (speaker/source, country, party)
-
+\frame{}
 
 \section{Content Analysis}
 \frame{\tableofcontents[currentsection]}
+
+\frame{
+\Large
+\begin{center}
+But the biggest issue is that once we have some texts, our interpretations are inherently subjective!
+\end{center}
+}
+
+
+\frame{
+
+Consider the following quote from a U.S. politician:
+
+\begin{quote}
+African Americans must stop making excuses and rely much more on themselves to get ahead in society.
+\end{quote}
+
+What does it mean? Is it positive or negative? Is it prejudicial?
+
+}
+
+
+\frame{
+\begin{center}
+\includegraphics[height=0.8\textheight]{images/kuklinskihurley.png}
+\end{center}
+
+{\tiny
+Kuklinski \& Hurley. 1994. ``On Hearing and Interpreting Political Messages: A Cautionary Tale of Citizen Cue-Taking.'' \textit{Journal of Politics} 56(3): 729--751.\\
+}
+}
+
+
+
 
 \frame{
 
@@ -157,6 +184,13 @@
 % graph showing textual input of one or more strings of text into an output of numbers/scores
 
 
+\frame{\includegraphics[height=\textheight]{images/grimmerstewart2.png}}
+\frame{\includegraphics[width=\textwidth]{images/ngram1.png}}
+\frame{\includegraphics[width=\textwidth]{images/ngram2.png}}
+\frame{\href{http://varianceexplained.org/r/trump-tweets/}{\includegraphics[width=\textwidth]{images/trumptweets.png}}}
+\frame{\href{http://tidytextmining.com/tfidf.html}{\includegraphics[width=\textwidth]{images/janeausten.png}}}
+
+
 \frame{
 
 \frametitle{Content Analysis Process}
@@ -164,10 +198,10 @@
 \begin{enumerate}
 \item<1-> Define a research question
 \item<2-> Define concepts
-\item<3-> Select texts
+\item<3-> Identify population (sample) of texts
 \item<4-> Create a \textit{codebook} that describes how to operationalize concepts using text
-\item<5-> Assign scores to texts based on codebook
-\item<6-> Summarize results
+\item<5-> Assign scores to text units based on codebook
+\item<6-> Aggregate and summarize results
 \end{enumerate}
 
 }
@@ -200,6 +234,7 @@
 	\item How is an issue discussed in politics?
 	\end{itemize}
 
+\item<2-> Running ex.: UKIP's 2015 Manifesto
 \end{itemize}
 
 }
@@ -257,7 +292,7 @@ If only all \textbf<2>{politicians} could believe in \textbf<2>{Britain} as \tex
 \frametitle{Developing Codebooks I}
 
 \begin{itemize}
-\item Developed deductively
+\item Developed \textit{deductively}\\
 	\begin{enumerate}\itemsep0.5em
 	\item Start with set of concepts
 	\item Describe how those concepts might be expressed in text
@@ -273,7 +308,7 @@ If only all \textbf<2>{politicians} could believe in \textbf<2>{Britain} as \tex
 \frametitle{Developing Codebooks II}
 
 \begin{itemize}
-\item Developed inductively
+\item Developed \textit{inductively}\\
 	\begin{enumerate}\itemsep0.5em
 	\item Examine texts for key ideas and expressions
 	\item Create a set of categories that summarize those expressions
@@ -288,7 +323,7 @@ If only all \textbf<2>{politicians} could believe in \textbf<2>{Britain} as \tex
 
 \frame{
 
-\frametitle{Codebook Examples}
+\frametitle{Codebook Example I}
 
 \footnotesize
 
@@ -302,7 +337,6 @@ If only all \textbf<2>{politicians} could believe in \textbf<2>{Britain} as \tex
 	\item Assign 0 if text does not mention ``Europe''
 	\end{itemize}
 \item<4-> List all frames used in the text
-\item<5-> Count number of words (or characters) in sentence
 \end{enumerate}
 
 }
@@ -330,7 +364,6 @@ Greens &  &  & & \\ \hline
 \end{center}
 
 \end{frame}
-
 
 
 
@@ -367,23 +400,67 @@ If only all politicians could \textit<3->{believe} in Britain as UKIP does. If o
 
 \frame{
 
-\frametitle{Unit of Analysis}
+\frametitle{{\large Unit of Analysis}}
 
-\begin{itemize}
-\item Can be difficult to decide what the correct unit of analysis is
-\item Possibilities:
-	\begin{itemize}
-	\item Author/Source
-	\item Text as a whole
-	\item Section
-	\item Page
-	\item Paragraph
-	\item Sentence
-	\item Sentence fragment
-	\end{itemize}
+It can be difficult to decide what the correct unit of analysis is. Possibilities include:
+
+\begin{multicols}{2}
+\begin{itemize}\footnotesize\itemsep0em
+\item Author/Source
+\item Text as a whole
+\item Section
+\item Page
+\item Paragraph
+\item Sentence
+\item Sentence fragment
+\item Word
 \end{itemize}
+\end{multicols}
+
+\only<2->{Smaller units can always be \textit{aggregated} later, but larger units cannot be \textit{disaggregated} later}
 
 }
+
+\begin{frame}
+
+\frametitle{Example Scoring Sheet (Paragraph-level)}
+
+\normalsize
+
+\begin{center}
+\begin{tabular}{|l|r|r|r|r|} \hline
+ & Mention & Count & Affect & Frame\\ \hline
+UKIP &  &  & & \\ \hline
+Conservative &  &  & & \\ \hline
+Labour &  &  & & \\ \hline
+LibDems &  &  & & \\ \hline
+SNP &  &  & & \\ \hline
+Greens &  &  & & \\ \hline
+\end{tabular}
+\end{center}
+
+\end{frame}
+
+
+\begin{frame}
+
+\frametitle{Example Scoring Sheet (Sentence-level)}
+
+\normalsize
+
+\begin{center}
+\begin{tabular}{|l|r|r|r|r|} \hline
+ & Sentence & Mention & Affect & Frame\\ \hline
+UKIP & 1 &  &  & \\ \hline
+UKIP & 2 &  &  & \\ \hline
+UKIP & 3 &  &  & \\ \hline
+UKIP & 4 &  &  & \\ \hline
+UKIP & 5 &  &  & \\ \hline
+\end{tabular}
+\end{center}
+
+\end{frame}
+
 
 \frame{
 
@@ -487,7 +564,7 @@ only only all they our
 
 \small
 
-\begin{itemize}\itemsep0.75em
+\begin{itemize}\itemsep0.5em
 \item<1-> ``Bag of words'' usually uses \textit{unigrams}
 \item<2-> Unigrams are often ``stemmed''
 	\begin{itemize}
@@ -503,6 +580,9 @@ only only all they our
 
 }
 
+
+\section{Practicalities/Reflection}
+\frame{\tableofcontents[currentsection]}
 
 
 \frame{
@@ -521,67 +601,62 @@ only only all they our
 
 }
 
+
 \frame{
 
 \frametitle{Intercoder Reliability}
 
 \small
 
-\begin{itemize}\itemsep1em
+\begin{itemize}\itemsep0.75em
 \item Definition: ``extent to which two (or more) coders agree on scores''
 \item<2-> Have multiple coders analyze same text using coding scheme
 \item<2-> Assess \% of time they assign same scores
-\item<2-> Increase specificity of codebook if reliability is low (<80\%)
+\item<2-> Increase specificity of codebook if reliability is low (less than 80\%)
 \end{itemize}
 
 }
 
 
+\frame{
+
+\frametitle{{\large Manual versus Automated Techniques}}
+
+\begin{itemize}\itemsep0.5em
+\item Text analysis methods vary along a continuum from fully manual to fully automated
+\item<2-> Automated methods can be computationally intensive
+\item<3-> Automated methods make assumptions, but so do manual methods
+\end{itemize}
+
+}
+
+% Why would we prefer manual versus automated methods?
+% Are automated methods objective?
+
+\frame{\includegraphics[width=\textwidth]{images/grimmerstewart.png}}
 
 
-\section{Group Discussions}
-\frame{\tableofcontents[currentsection]}
-
+\frame{}
 
 \frame{
 
-\frametitle{Problem Set 4}
+\frametitle{``Quant'' or ``Qual''?}
 
-\small
-
-\begin{enumerate}\itemsep0.5em
-\item You have been assigned teams
-\item Develop a research question that can be answered using the party manifestos from the UK 2015 General Election
-\item Develop a content analyze scheme or codebook and use it to analyze the manifestos
-\item Write up your results as a group
-\end{enumerate}
+Given what you know now, in what ways is content analysis a ``qualitative'' versus ``quantitative'' research method?
 
 }
 
 
 \frame{
 
-\frametitle{Group Discussion Time}
+\frametitle{Hands-On Practice}
 
-With remaining time, gather in your Problem Set 4 groups and discuss the assignment.\\
-
-\vspace{1em}
-
-Let me know via email or office hours if you have questions between now and the due date.
-
+\begin{itemize}\itemsep0.5em
+\item There is no explicit lab for this topic
+\item If you are interested, consider reading the Recommended text for this week, which includes hands-on exercises in R: \url{http://tidytextmining.com/}
+\end{itemize}
 }
 
-
-\frame{
-
-\vspace{3em}
-
-\begin{center}
-Enjoy your holiday break!
-\end{center}
-
-
-}
 
 
 

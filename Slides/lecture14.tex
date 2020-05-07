@@ -1,3 +1,5 @@
+\documentclass[17pt]{beamer} %Makes presentation
+%\documentclass[handout, 17pt]{beamer} %Makes Handouts
 \input{preamble}
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows}
@@ -15,26 +17,43 @@
 
 \frame{\tableofcontents}
 
-\section[Case Studies]{Case Studies Continued}
+\section{Case Studies}
 \frame{\tableofcontents[currentsection]}
+
+\frame{
+
+\frametitle{Overview}
+
+\begin{itemize}\itemsep0.5em
+\item Consistently the most dominant method of social research
+\item Often poorly executed (and poorly understood)
+\item Four weeks (partially) on this topic
+	\begin{itemize}
+	\item Today: What is a case study?
+	\item MT10: Representative sampling
+	\item LT4: Case comparisons
+	\item LT5: Process-tracing methods
+	\end{itemize}
+\end{itemize}
+
+}
 
 \frame{
 
 \frametitle{What is a case study?}
 
-\begin{itemize}\itemsep0.1em
+\begin{itemize}\itemsep1em
 \item Definition: ``an intensive study of a single unit for the purpose of understanding a larger class of (similar) units'' (Gerring 2004, 342)
-\item Broad uses:
+\item<2-> Different ways to choose cases:
 	\begin{itemize}
-	\item Description
-	\item Induction/Theory development
-	\item Theory testing
-	\item Exploration of mechanisms
-	\item Concept definition and measurement
+	\item Purposive
+	\item Representative (MT10)
+	\item Matched (next term)
 	\end{itemize}
 \end{itemize}
 
 }
+
 
 % not simply attempting to score a case on a variable but attempting to understand it at a very deep level
 
@@ -42,9 +61,138 @@
 
 \frame{
 
-\frametitle{What counts as a case?} % activity
+\frametitle{What kinds of evidence?}
 
-\begin{itemize}\itemsep0.25em
+\begin{itemize}\itemsep0.5em
+\item<2-> Non-DSOs
+	\begin{itemize}
+	\item<3-> Direction observation
+	\item<3-> Focus groups
+	\item<3-> Interviews
+	\item<3-> Archival/documentary analysis
+	\end{itemize}
+\item<2-> DSOs
+	\begin{itemize}
+	\item<4-> Surveys
+	\item<4-> Statistical methods
+	\item<4-> Data mining (e.g., ``big data'')
+	\item<4-> Content analysis
+	\item<4-> Experiments
+	\end{itemize}
+\end{itemize}
+
+}
+
+\frame{
+
+\frametitle{Why do case studies?}
+
+A case study can serve as any of the following:
+
+\begin{itemize}\small
+\item<2-> An in-depth investigation of a single case that stands alone
+\item<3-> An in-depth investigation of a case that is compared with other case studies
+\item<4-> An in-depth investigation of a case that precedes a ``large-N'' study of many cases
+\item<5-> An in-depth investigation of a case that follows from a ``large-N'' study of many cases
+\end{itemize}
+
+}
+
+
+% why do case studies?
+%% variable identification
+%% sequencing - what happened?
+%% DSOs within case (different unit of analysis; or DSOs across time)
+%% measurement - what is the score for this case on a variable?
+%% search for confounders
+
+
+% Wedeen - what is this? what is going on?
+% Mershon - DSOs, lots of DSOs. what units of analysis?
+
+
+% exploring a case as a DSO (already know what it is a case of)
+% exploring a case to score a DSO (don't know what it's score is)
+% exploring a case to decide what it is a case of (don't know the population or necessarily the variables)
+
+\frame{
+\frametitle{Case as DSO}
+
+What is the score for this case for a variable?\\
+How can we best measure this variable?
+
+\begin{center}
+\begin{tabular}{lccc}
+Case & Measure1 & Measure2 & Measure3 \\ \hline
+UK & 1 & 10 & 2 \\
+France & \fbox{\parbox{0.6em}{\textbf{?}}} & 5 & 2 \\
+Germany & 0 & 4 & 2 \\
+Spain & 1 & 7 & 2 \\
+\dots \\ \hline
+\end{tabular}
+\end{center}
+}
+
+\frame{
+\frametitle{Case to observe DSO}
+
+What does the score on this case \textit{mean}?
+
+\begin{center}
+\begin{tabular}{lccc}
+Case & Measure1 & Measure2 & Measure3 \\ \hline
+UK & 1 & 10 & 2 \\
+France & \fbox{\parbox{0.6em}{\textbf{1}}} & 5 & 2 \\
+Germany & 0 & 4 & 2 \\
+Spain & 1 & 7 & 2 \\
+\dots \\ \hline
+\end{tabular}
+\end{center}
+}
+
+\frame{
+\frametitle{Case as induction}
+
+\textit{Why} does this case have this score?\\
+\textit{What} effects does that score have?
+
+\begin{center}
+\begin{tabular}{lccc}
+Case & Measure1 & Measure2 & Measure3 \\ \hline
+UK & 1 & 10 & 2 \\
+France & \fbox{\parbox{0.6em}{\textbf{1}}} & 5 & 2 \\
+Germany & 0 & 4 & 2 \\
+Spain & 1 & 7 & 2 \\
+\dots \\ \hline
+\end{tabular}
+\end{center}
+}
+
+
+\frame{
+\frametitle{Case as induction}
+
+What is this a \textit{case of}?\\
+What are the variables that matter?
+
+\begin{center}
+\begin{tabular}{lccc}
+Case & Measure1 & Measure2 & Measure3 \\ \hline
+? & ? & ? & ? \\
+\fbox{\parbox{4.5em}{\textbf{``France''}}} & ? & ? & ? \\
+? & ? & ? & ? \\
+? & ? & ? & ? \\
+\dots \\ \hline
+\end{tabular}
+\end{center}
+}
+
+
+\frame{
+
+\frametitle{What counts as a \textit{case}?} % activity
+
+\begin{itemize}\itemsep0.5em
 \item<2-> The more important question is what is something a \textit{case of}
 \item<2-> Cases are instances of a concept or phenomenon
 	\begin{itemize}
@@ -68,22 +216,268 @@
 
 \frame{
 
-\frametitle{Types of testing}
+\frametitle{Case Studies Have Different Functions}
+
+\begin{enumerate}
+\item Description
+\item Concept definition and measurement
+\item Induction/Theory development
+\item Theory testing
+\end{enumerate}
+
+\small
+What kinds of evidence do we gather for each?
+
+}
+
+\frame{
+
+\frametitle{Gerring's Typology}
+
+
+\begin{center}
+\begin{tabular}{llcc} \cline{3-4}
+ & & \multicolumn{2}{c}{\textbf{Temporal Variation}} \\
+ & & \textit{No} & \textit{Yes} \\ \hline
+\textbf{Spatial} & \textit{No} & ? & Type I \\
+\textbf{Variation} & \textit{Yes} & Type II & Type III \\ \hline
+\end{tabular}
+\end{center}
+
+\small
+\begin{itemize}
+\item<2-> Type I: sequence
+\item<3-> Type II: lower unit of analysis
+\item<4-> Type III: ``panel'' of lower-level units
+\end{itemize}
+
+
+}
+
+
+
+
+\frame{
+\frametitle{1: Description}
+\begin{itemize}\itemsep1em
+\item Case study might be descriptive
+\item Historical or interpretive
+\item Think ``biography''
+\item Gerring: Type I--III case studies
+\end{itemize}
+}
+
+% what happened; when did events happen; who was involved; etc.
+
+\frame{
+\frametitle{2: Concept Definition}
+\begin{itemize}\itemsep0.5em
+\item Sometimes you don't know what you are studying
+\item Case studies can clarify what something is a \textit{case of}
+\item This helps you to:
+	\begin{itemize}
+	\item Refine your concept definition
+	\item Improve measurement
+	\end{itemize}
+\end{itemize}
+}
+
+
+\frame{
+\frametitle{3: Theory development}
+\begin{itemize}\itemsep0.5em
+\item Case is an instance of a phenomenon
+\item There is some outcome to be \textit{explained}
+	\begin{itemize}
+	\item Outcome is case itself
+	\item Outcome of a case
+	\item Outcome as part of case
+	\end{itemize}
+\item Look for ``Causal Process Observations''
+\item Attempt to identify generalizable explanations
+\end{itemize}
+}
+
+\frame{
+\frametitle{{\large Causal Process Observations}}
+
+\normalsize
+
+\begin{itemize}\itemsep0.5em
+\item Definition: ``An insight or piece of data that provides information about the context, process, or mechanism, and that contributes distinctive leverage in causal inference''\footnote{Brady and Collier 2004, p.277}
+\item Pieces of evidence that help you inductively generate hypotheses about potential causal relationships
+\end{itemize}
+}
+
+
+\frame{
+
+\frametitle{4: Theory testing}
+
+\begin{itemize}\itemsep1em
+\item Descriptive theories/frameworks
+\item<2-> Causal theories
+	\begin{itemize}
+	\item ``Actual case'' comparisons
+	\item Fearon's ``Counterfactual method''
+	\item Process tracing
+	\end{itemize}
+\end{itemize}
+
+}
+
+\section{Uses of Case Studies}
+\frame{\tableofcontents[currentsection]}
+
+
+\frame<1>[label=uses]{
+
+\frametitle{What is a case study?}
 
 \small
 
-\begin{itemize}\itemsep1em
-\item Hypothesis confirming: ``most likely'' case
-\item Hypothesis weakening: ``least likely'' case
-\item Hypothesis generating: ``deviant'' cases
-\item Concept definition: ``new'' cases
+\begin{itemize}\itemsep0.5em
+\item Definition: ``an intensive study of a single unit for the purpose of understanding a larger class of (similar) units'' (Gerring 2004, 342)
+\item Broad uses:
+	\begin{itemize}
+	\item Description
+	\item Concept definition and measurement
+	\item Induction/Theory development
+	\item \textbf<2>{Theory testing}
+	\item Exploration of mechanisms
+	\end{itemize}
 \end{itemize}
 
 }
 
 
+
+\frame{
+\frametitle{1: Description}
+\begin{itemize}\itemsep1em
+\item Case study might be descriptive
+\item Historical or interpretive
+\item Think ``biography'' of a case
+\end{itemize}
+}
+
+% what happened; when did events happen; who was involved; etc.
+
+\frame{
+\frametitle{2: Concept Definition}
+\begin{itemize}\itemsep1em
+\item Sometimes you don't know what you are studying
+\item Case studies can clarify what something is a \textit{case of}
+\item This helps you to:
+	\begin{itemize}
+	\item Refine your concept definition
+	\item Improve measurement
+	\end{itemize}
+\end{itemize}
+}
+
+\frame{
+\frametitle{3: Theory development}
+\begin{itemize}\itemsep0.5em
+\item Case is an instance of a phenomenon
+\item There is some outcome to be explained
+	\begin{itemize}
+	\item Outcome is case itself
+	\item Outcome of a case
+	\item Outcome as part of case
+	\end{itemize}
+\item Look for ``Causal Process Observations''
+\item Attempt to identify generalizable explanations
+\end{itemize}
+}
+
+% we see this in the second half of Doner et al.
+
+\frame{
+\frametitle{{\large Causal Process Observations}}
+
+\normalsize
+
+\begin{itemize}\itemsep0.5em
+\item Definition: ``An insight or piece of data that provides information about the context, process, or mechanism, and that contributes distinctive leverage in causal inference''\footnote{Brady and Collier 2004, p.277}
+\item Essentially pieces of evidence that offer insight into within-case counterfactuals
+\end{itemize}
+}
+
+% more on this next week
+
+
+\frame{
+\frametitle{4: Theory testing}
+\begin{itemize}\itemsep1em
+\item ``Actual case'' comparisons
+	\begin{itemize}
+	\item Mill's methods
+	\end{itemize}
+\item Fearon's ``Counterfactual method''
+\item Process tracing
+\end{itemize}
+}
+
+
+
+
+\frame{
+\frametitle{5: Mechanisms}
+\begin{itemize}\itemsep0.5em
+\item Imagine you already have evidence for a causal relationship
+\item A case study can help you explore or test for ``mechanisms'' of that effect
+\item This is our focus next week
+\end{itemize}
+}
+
+% not simply attempting to score a case on a variable but attempting to understand it at a very deep level
+
+
+\againframe{uses}
+
+
+\frame{
+
+\frametitle{A Good Test}
+
+\small
+
+\begin{itemize}\itemsep-0.1em
+\item<2-> Correct level of analysis
+\item<3-> Within scope conditions of theory
+\item<4-> Well-defined concepts
+\item<5-> Measures of high construct validity, accuracy, and precision
+\item<6-> Possible to observe any correlation between potential cause and outcome
+\item<7-> Consistent with or an improvement upon past methods
+\item<8-> Test using different data than data used to generate theory % distinguish between training set and test set
+\end{itemize}
+
+}
+
+
+\frame{
+
+Theory testing involves:
+
+\begin{itemize}
+\item \textbf<2>{Between-case comparisons}, or 
+\item Across-time comparisons, or 
+\item Between-case \& across-time comparisons
+\item Within-case comparisons at a lower level of analysis
+\end{itemize}
+
+}
+
+
+
+\frame{}
+
+
 \section{Case Comparisons}
 \frame{\tableofcontents[currentsection]}
+
+
 
 \frame{
 
@@ -120,7 +514,7 @@ You have 3 minutes.
 
 
 \frame{
-\frametitle{Mill's methods\footnote{Discussed in Holland (1986) from Week 2}}
+\frametitle{Mill's methods\footnote{Discussed in Holland (1986)}}
 
 \begin{enumerate}\itemsep0.5em
 \item \textbf<2->{Agreement}
@@ -227,126 +621,211 @@ If two or more instances in which the phenomenon occurs have only one circumstan
 \frametitle{{\large Limitations of Mill's Methods}}
 
 \begin{itemize}\itemsep0.5em
-\item Necessary causes (Deterministic)
-\item Works best with limited number of variables
+\item<2-> Necessary causes (Deterministic)
+\item<3-> Works best with limited number of variables
 	\begin{itemize}
+	\item Variables have to be categorical
 	\item Multiple causation is difficult to accommodate
 	\end{itemize}
-\item Works best with limited number of cases
-\item Assume all potential explanations not examined do not matter
+\item<4-> Works best with limited number of cases
+\item<5-> Assume all potential explanations not examined do not matter
 \end{itemize}
 
 }
 
 \frame{}
 
+\frame{
+
+\frametitle{Mixing Methods}
+
+\begin{itemize}\itemsep1em
+\item Between-case comparisons help us understand causality
+\item We may want to mix this with further in-depth case studies
+	\begin{itemize}\itemsep0.5em
+	\item<2-> Hypothesis confirming: ``most likely'' case
+	\item<3-> Hypothesis weakening: ``least likely'' case
+	\item<4-> Hypothesis generating: ``deviant'' cases
+	\end{itemize}
+\end{itemize}
+
+}
 
 
-\section[Uses of Case Studies]{Five Uses of Case Studies}
+
+\frame{}
+
+
+\section{Case Selection}
 \frame{\tableofcontents[currentsection]}
 
 
 \frame{
-\frametitle{1: Description}
-\begin{itemize}\itemsep1em
-\item Case study might be descriptive
-\item Historical or interpretive
-\item Think ``biography''
-\end{itemize}
-}
-
-% what happened; when did events happen; who was involved; etc.
-
-\frame{
-\frametitle{2: Theory development}
-\begin{itemize}\itemsep0.5em
-\item Case is an instance of a phenomenon
-\item There is some outcome to be explained
-	\begin{itemize}
-	\item Outcome is case itself
-	\item Outcome of a case
-	\item Outcome as part of case
+	\frametitle{Case selection}
+	
+	Our ambitions about what kind of inferences we want to derive from our descriptions influence how we select cases.
+	
+	\begin{itemize}\itemsep1em
+	\item<2-> Purposive
+	\item<3-> \textbf<5>{Comparative}
+	\item<4-> Representative
 	\end{itemize}
-\item Look for ``Causal Process Observations''
-\item Attempt to identify generalizable explanations
-\end{itemize}
 }
-
-% we see this in the second half of Doner et al.
 
 
 \frame{
-\frametitle{{\large Causal Process Observations}}
 
-\normalsize
+\frametitle{{\normalsize What cases can we compare?}}
+
+\small
 
 \begin{itemize}\itemsep0.5em
-\item Definition: ``An insight or piece of data that provides information about the context, process, or mechanism, and that contributes distinctive leverage in causal inference''\footnote{Brady and Collier 2004, p.277}
-\item Essentially pieces of evidence that offer insight into within-case counterfactuals
-\end{itemize}
-}
-
-% more on this next week
-
-\frame{
-\frametitle{3: Theory testing}
-\begin{itemize}\itemsep1em
-\item ``Actual case'' comparisons
+\item Cases should be \textbf{matched} on covariates
 	\begin{itemize}
-	\item Mill's methods
+	\item Constant covariates cannot be (individually) causal\footnote{But, constant covariates may be INUS causes (insufficient but necessary parts of an unnecessary but sufficient cause)}
 	\end{itemize}
-\item Fearon's ``Counterfactual method''
-\item Process tracing
-\end{itemize}
-}
-
-
-% thinking counterfactually
-	% can we observe the counterfactual (in another case, in the same case at another time, in a collection of other cases)?
-	% if not, can we think about what that counterfactual might look like? 
-	% see Fearon's use of ``counterfactual method''; thought experiments; hypothetical reasoning
-% actual case comparisons need to take the form of Mill's methods
-
-\frame{
-\frametitle{4: Mechanisms}
-\begin{itemize}\itemsep0.5em
-\item Imagine you already have evidence for a causal relationship
-\item A case study can help you explore or test for ``mechanisms'' of that effect
-\item This is our focus next week
-\end{itemize}
-}
-
-\frame{
-\frametitle{5: Concept Definition}
-\begin{itemize}\itemsep0.5em
-\item Sometimes you don't know what you are studying
-\item Case studies can clarify what something is a \textit{case of}
-\item This helps you to:
+\item<2-> Holding time constant may be useful, but not always
 	\begin{itemize}
-	\item Refine your concept definition
-	\item Improve measurement
+	\item Spain 2016 vs. Italy 2016
+	\item Spain 1982 vs. Romania 1990
+	\end{itemize}
+\item<3-> This logic applies regardless of $n$
+\end{itemize}
+
+}
+
+
+
+\frame{
+
+\frametitle{An Example}
+
+\small
+
+\begin{itemize}\itemsep0.5em
+\item For example, if we think smoking might cause lung cancer, how would we know?
+\vspace{0.5em}
+\item<2-> How would we know if smoking caused lung cancer for an individual who smoked?
+	\begin{itemize}
+	\item What's the relevant counterfactual?
+	\end{itemize}
+\item<3-> How would we know if smoking causes lung cancer on average across many individuals?
+	\begin{itemize}
+	\item What's the relevant counterfactual?
 	\end{itemize}
 \end{itemize}
+
 }
+
+\frame<1-3>[label=smoking]{
+
+\frametitle{Smoking Example}
+
+\small
+
+\begin{enumerate}\itemsep0.5em
+\item<2-> Partition population into ``smokers'' ($X = 1$) and ``non-smokers'' ($X = 0$) 
+\item<3-> Identify possible confounds
+	\begin{itemize}\tiny
+	\item Sex
+	\item Age
+	\item Income
+	\item Education
+	\item Parental smoking
+	\item Diet
+	\item etc.
+	\end{itemize}
+\item<4-> Estimate difference in cancer rates between smokers and non-smokers within each group of \textit{covariates}
+\end{enumerate}
+
+}
+
+
+\begin{frame}<1>[label=dag]
+\begin{center}
+\begin{tikzpicture}[>=latex',circ/.style={draw, shape=circle, node distance=5cm, line width=1.5pt}]
+    \draw[->] (0,0) node[left] (X) {Smoking} -- (5,0) node[right] (Y) {Cancer};
+    \draw[->] (-3,3) node[above] (Z) {Sex} -- (X);
+    \draw[->] (Z) -- (Y);
+    \draw[->] (5,2) node[above] (A) {Environment} -- (Y);
+    \draw[->] (-2, -2) node[below, text width=2.5cm, align=center] (W) {Parental\\Smoking} -- (X);
+    \draw[->] (W) -- (Y);
+    \draw<2->[->] (4,-3) node[below] (E) {Other factors} -- (Y);
+    \draw<2->[->, dashed, very thick] (E) -- (X);
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\againframe<3>{smoking}
+
+
+\frame{
+
+\centering
+\tikzset{font=\small}
+\begin{tikzpicture}[level distance=2cm,
+  level 1/.style={sibling distance=5.75cm},
+  level 2/.style={sibling distance=3cm},
+  level 3/.style={sibling distance=1.5cm}]
+  \node {population}
+    child {node {university degree}
+      child {node {old}
+        child {node {male}}
+        child {node {female}}
+      }
+      child {node {young}
+        child {node {male}}
+        child {node {female}}
+      }
+    }
+    child {node {no degree}
+      child {node {old}
+        child {node {male}}
+        child {node {female}}
+      }
+      child {node {young}
+        child {node {male}}
+        child {node {female}}
+      }
+    };
+\end{tikzpicture}
+
+
+
+}
+
+
+\againframe<4>{smoking}
+
+\againframe<1-2>{dag}
+
 
 \frame{}
 
-
 \frame{
 
-\frametitle{Preview}
+\frametitle{{\normalsize Activity!}}
 
-\begin{itemize}\itemsep1em
-\item Next week: Process-tracing
-\item Problem Set 3 Due
-\item Start thinking about research topics for Week 11
-\end{itemize}
+\small
+
+\begin{enumerate}\itemsep0.25em
+\item Think about the population of all television programmes
+\item Identify \textbf{one factor} that you think might affect \textbf{viewership}
+\item Identify \textbf{other factors} that may confound the effect of the factor and partition the population based upon those factors
+	\begin{itemize}
+	\item What are the other factors?
+	\item Do you have ``treated'' and ``comparison'' cases in every ``cell''?
+	\end{itemize}
+\end{enumerate}
+
 
 }
 
 
-\frame{}
-% If time is permitting, use TV reality shows as a way to create a typology
+
+
+
+
 
 
 
